@@ -49,9 +49,38 @@ ls result/bin
 
 | コマンド | 用途 |
 | --- | --- |
+| **`memory-tencentdb-gateway`** | **ゲートウェイの起動**（このリポジトリで追加したラッパー） |
 | `read-local-memory` | ローカルメモリの読み出し |
 | `export-tencent-vdb` | ベクタ DB のエクスポート |
 | `migrate-sqlite-to-tcvdb` | SQLite から TencentDB VectorDB への移行 |
+
+`$out/hermes-plugin` から Hermes 用の Python プラグイン本体を参照できる。
+
+### ゲートウェイについて
+
+上流は `dist` にゲートウェイを含めず、**`src/gateway/server.ts` を直接実行する設計**である。`tsx` は本番依存として同梱されるため、`pnpm` は不要。
+
+`memory-tencentdb-gateway` はこれをラップしたもので、次を置き換える。
+
+```bash
+# 従来（パスが手動配置先に固定される）
+sh -c "cd /path/to/plugin && pnpm exec tsx src/gateway/server.ts"
+
+# これ以降
+memory-tencentdb-gateway
+```
+
+主な環境変数（上流の実装が読むもの）:
+
+| 変数 | 用途 |
+| --- | --- |
+| `TDAI_DATA_DIR` | データディレクトリ。既定は `~/.memory-tencentdb/memory-tdai` |
+| `MEMORY_TENCENTDB_ROOT` | ルートディレクトリ |
+| `TDAI_GATEWAY_HOST` / `TDAI_GATEWAY_PORT` | 待ち受け先 |
+| `TDAI_LLM_API_KEY` / `TDAI_LLM_BASE_URL` / `TDAI_LLM_MODEL` | LLM の接続先 |
+| `TDAI_GATEWAY_API_KEY` | ゲートウェイの認証 |
+
+なお `TDAI_HOME` は**存在しない**（指定しても無視される）。
 
 ---
 
