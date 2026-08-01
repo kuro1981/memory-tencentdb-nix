@@ -1,0 +1,9 @@
+{
+  "name": "memory-tencentdb-nix",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Nix packaging wrapper for @tencentdb-agent-memory/memory-tencentdb",
+  "dependencies": {
+    "@tencentdb-agent-memory/memory-tencentdb": "^1.0.1"
+  }
+}
