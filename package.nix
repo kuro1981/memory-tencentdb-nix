@@ -5,11 +5,11 @@
 }:
 
 let
-  version = "1.0.1";
+  version = "1.0.3";
 
   # `nix build` が失敗したときに表示される正しい値へ差し替える。
   # scripts/update.sh が自動で更新する。
-  npmDepsHash = "sha256-fVGiAEuvEhayla9p9VIrK08ZHLBIdmTSHk4FhcHDTc0=";
+  npmDepsHash = "sha256-ZbED15NDiV+82o0G44rsNS166610nOxE+GJ9D/4M1NU=";
 in
 buildNpmPackage {
   pname = "memory-tencentdb";
